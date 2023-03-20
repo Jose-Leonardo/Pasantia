@@ -2,17 +2,21 @@ const express = require('express')
 const cors = require('cors')
 const helmet = require('helmet')
 require('dotenv').config()
-
-const routerModels = require('./routes/models.router')
-const routerErrorHandler = require('./routes/errorhandler.router')
-
+const swaggerUi = require('swagger-ui-express')
+const  swaggerJSDoc = require( 'swagger-jsdoc' )
 
 const app = express()
 const PORT = process.env.PORT || 8000
 
-/*
-Cors Settings
-*/
+const routerModels = require('./routes/models.router')
+const routerErrorHandler = require('./routes/errorhandler.router')
+const userRouter = require('./routes/users.router')
+const options = require('./utils/swagger')
+
+app.use('/api/v1/users', userRouter)
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(options)))
+//Cors Settings
+
 const whitelist = ['http://localhost:8000']
 const corsOptions = {
   origin: (origin, callback) => {
@@ -36,15 +40,13 @@ if (process.env.NODE_ENV === 'production') {
   app.use(cors())
 }
 
-/*
-Accept Json & form-urlencoded
-*/
+//Accept Json & form-urlencoded
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
-/* 
-    Tell everyone the state of your api
-*/
+//   Tell everyone the state of your api
+
 app.get('/', ({ res }) => {
   return res.json({
     status: 'Up',
@@ -52,12 +54,12 @@ app.get('/', ({ res }) => {
   })
 })
 
-/*
-Routes
-*/
+//Routes
+
 routerModels(app)
 routerErrorHandler(app)
 
 app.listen(PORT, () => {
   console.log(`Server on PORT: ${PORT}`)
+  console.log(`version 1 docs are available at http://localhost:${PORT}/api/docs`)
 })
