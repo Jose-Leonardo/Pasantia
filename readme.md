@@ -55,15 +55,27 @@ Hecho eso, con el siguiente commando estaría listo:
 
 Existe una explicación en el notion del proyecto que explica el ___Dockerfile___ y ___docker-compose.yml___
 
+# git pull
+/*actualizar el repositorio local
 
 # git branch 
 /*Nos indica en que rama trabajamos
+
 # git checkout -b NombreRama
 /* Crea la rama e ingresas a ella
+
 # git checkout NombreRama
 /* Solo para cambiar de rama 
+
+# git push origin <rama>
+/*Sube las ramas al repositorio remoto
+
 # git merge NombreRama
-/* Para traer los cambios a la rama principla (este comando se ejecuta de la rama -main-)
+/* Para traer los cambios a la rama principal-(este comando se ejecuta de la rama -main-)
+
+# git push origin main
+/*Subir cambios al repositorio remoto
+
 # git status o git status -s
 /* Para ver el estado de los archivos con respecto a git (M, A, ??)
 # git log --oneline
