@@ -17,7 +17,7 @@ app.use('/api/v1/users', userRouter)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(options)))
 //Cors Settings
 
-const whitelist = ['http://localhost:3000']
+const whitelist = ['http://localhost:8000']
 const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.includes(origin) ||  !origin) {
