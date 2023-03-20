@@ -14,10 +14,10 @@ const userRouter = require('./routes/users.router')
 const options = require('./utils/swagger')
 
 app.use('/api/v1/users', userRouter)
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(options)))
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(options)))
 //Cors Settings
 
-const whitelist = ['http://localhost:8000']
+const whitelist = ['http://localhost:3000']
 const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.includes(origin) ||  !origin) {
@@ -61,5 +61,5 @@ routerErrorHandler(app)
 
 app.listen(PORT, () => {
   console.log(`Server on PORT: ${PORT}`)
-  console.log(`version 1 docs are available at http://localhost:${PORT}/api/docs`)
+  console.log(`version 1 docs are available at http://localhost:${PORT}/api-docs`)
 })
